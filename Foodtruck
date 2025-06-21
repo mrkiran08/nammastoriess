@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Food Truck Fun Quiz</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff8e1;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    #quiz-box {
+      background: #ffffff;
+      padding: 20px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 90%;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
+    button {
+      background: #ff6f00;
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      margin: 8px 4px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e65100;
+    }
+    .options {
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="quiz-box">
+    <h2 id="question">Loading...</h2>
+    <div class="options" id="options"></div>
+    <button onclick="nextQuestion()">Next</button>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "What type of food do you crave the most when you're outdoors?",
+        options: ["Spicy", "Sweet", "Fried", "Healthy"]
+      },
+      {
+        question: "How often do you eat from a food truck?",
+        options: ["Daily", "Once a week", "Rarely", "Never"]
+      },
+      {
+        question: "What’s your dream combo?",
+        options: ["Momos + Masala Soda", "Fries + Thick Shake", "Roll + Nimbu Pani", "Sandwich + Chai"]
+      },
+      {
+        question: "Would you join a 'Finish the Mega Burger' challenge?",
+        options: ["Yes, bring it on!", "Only if it's not spicy", "Maybe", "Nope!"]
+      },
+      {
+        question: "Which theme would excite you?",
+        options: ["Bollywood", "Street Carnival", "Anime", "Tandoori Nights"]
+      },
+      {
+        question: "What would you name a spicy burger?",
+        options: ["Fire Blast", "Bite Me!", "Spicezilla", "Hot Mess"]
+      }
+    ];
+
+    let currentQuestion = 0;
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById("question").innerText = q.question;
+      const opts = q.options.map(
+        opt => `<button onclick="selectOption('${opt}')">${opt}</button>`
+      ).join("<br>");
+      document.getElementById("options").innerHTML = opts;
+    }
+
+    function selectOption(option) {
+      console.log(`Selected: ${option}`); // You can send to a server here if needed
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        showQuestion();
+      } else {
+        document.getElementById("quiz-box").innerHTML = `
+          <h2>🎉 Thank You for Playing!</h2>
+          <p>Your answers help us cook up something awesome!</p>
+        `;
+      }
+    }
+
+    window.onload = showQuestion;
+  </script>
+
+</body>
+</html>
+        
